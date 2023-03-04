@@ -17,9 +17,9 @@ public class Recommend {
     private String playlistId;
     @Column(name = "recommend_playlist_id")
     private String recommendPlaylist;
-    private Long rating;
+    private Double rating;
 
-    public void updateRating(Long rating) {
+    public void updateRating(Double rating) {
         this.rating = rating;
     }
 }

@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class RequestFeedback {
-    private Long rating;
+    private Double rating;
 }

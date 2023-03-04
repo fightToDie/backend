@@ -1,10 +1,7 @@
 package com.vivace.recommendservice.controller;
 
 import com.vivace.recommendservice.service.RecommendService;
-import com.vivace.recommendservice.vo.RequestEmailDto;
-import com.vivace.recommendservice.vo.RequestFeedback;
-import com.vivace.recommendservice.vo.ResponsePlaylist;
-import com.vivace.recommendservice.vo.ResponseTrack;
+import com.vivace.recommendservice.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +15,15 @@ public class recommendController {
     private RecommendService recommendService;
 
     @GetMapping("")
-    public ResponseEntity<ResponsePlaylist> recommendByTrack(@RequestParam String title, @RequestParam String artist) {
-        ResponsePlaylist responsePlaylist = recommendService.recommendByTrack(title, artist);
-        return ResponseEntity.status(HttpStatus.OK).body(responsePlaylist);
+    public ResponseEntity<ResponseTrackUriList> recommendByTrack(@RequestParam String title, @RequestParam String artist) {
+        ResponseTrackUriList responseTrackUrilist = recommendService.recommendByTrack(title, artist);
+        return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 
     @GetMapping("/playlist/{playlistId}")
-    public ResponseEntity<ResponsePlaylist> recommendByPlaylist(@PathVariable String playlistId) {
-        ResponsePlaylist responsePlaylist = recommendService.recommendByPlaylist(playlistId);
-        return ResponseEntity.status(HttpStatus.OK).body(responsePlaylist);
+    public ResponseEntity<ResponseTrackUriList> recommendByPlaylist(@PathVariable String playlistId) {
+        ResponseTrackUriList responseTrackUrilist = recommendService.recommendByPlaylist(playlistId);
+        return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 
     @GetMapping("/genre")
@@ -36,10 +33,20 @@ public class recommendController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<ResponsePlaylist> searchTrackByTitle(@RequestParam String title) {
-        ResponsePlaylist responsePlaylist = recommendService.searchTrackByTitle(title);
-        return ResponseEntity.status(HttpStatus.OK).body(responsePlaylist);
+    public ResponseEntity<ResponseTrackUriList> searchTrackByTitle(@RequestParam String title, @RequestParam int offset) {
+        ResponseTrackUriList responseTrackUrilist = recommendService.searchTrackByTitle(title, offset);
+        return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
+
+//    @GetMapping("/wordcloud/genre")
+//    public ResponseEntity<ResponseWordcloud> getGenreWordcloud() {
+//        recommendService.getGenreWordcloud()
+//    }
+//
+//    @GetMapping("/wordcloud/title")
+//    public ResponseEntity<ResponseWordcloud> getTitleWordcloud() {
+//
+//    }
 
     @PostMapping("/feedback/{recommendId}")
     public ResponseEntity<String> feedbackRecommend(@PathVariable Long recommendId, @RequestBody RequestFeedback requestFeedback) {

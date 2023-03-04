@@ -1,15 +1,15 @@
 package com.vivace.recommendservice.service;
 
-import com.vivace.recommendservice.vo.ResponsePlaylist;
+import com.vivace.recommendservice.vo.ResponseTrackUriList;
 import com.vivace.recommendservice.vo.ResponseTrack;
 
 public interface RecommendService {
-    ResponsePlaylist recommendByTrack(String title, String artist);
+    ResponseTrackUriList recommendByTrack(String title, String artist);
 
-    ResponsePlaylist recommendByPlaylist(String playlistId);
+    ResponseTrackUriList recommendByPlaylist(String playlistId);
     ResponseTrack recommendByGenre(String email);
 
-    ResponsePlaylist searchTrackByTitle(String title);
+    ResponseTrackUriList searchTrackByTitle(String title, int offset);
 
-    void feedbackRecommend(Long recommendId, Long rating);
+    void feedbackRecommend(Long recommendId, Double rating);
 }
