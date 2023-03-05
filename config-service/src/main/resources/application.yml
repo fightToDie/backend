@@ -1,0 +1,69 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:fightToDie/config.git
+          ignoreLocalSshSettings: true
+          privateKey: |
+                        -----BEGIN RSA PRIVATE KEY-----
+                        MIIJKQIBAAKCAgEAzY9VDMFhNtrcDhwBq6lbWF7inCyfxC3MLBBMeSgdA0Rcg2G6
+                        J6kFg3SxI2nkF7qG9zfA4Y2b0eQV0i/Bo817KfR/VTm7HQdUw+zDgLcgRU5SVXy2
+                        H0lfvfuTaqZGuEu6dX3oTDnM3Q0o1xgBq+BEYDZ+8NNJiHfSPx1cdOhpw+vH7YTB
+                        ZoiSdIVXjt3jp27ARQsramZOhdLwU8QNdj5pHyMtt0YAn+k30P/O924tTofCqDN0
+                        +wOR201yrKjtbquzz9mTac8MNUXxwU73lriCZGJ2SYi+5yNt0+wq0ilz3BBNUJ8Y
+                        5MB5Kygh/vRce6JFKtlu3H8OL7K3jqDGgRXWkZ40ghBmToNCAXosjlIr/orlgywJ
+                        jVGKFLbI2LhxFWE41/1f//7L5tuCatIdXAQG4/ThGK1BYW7zkQukB0yLnghd13ja
+                        99IqRZF3vFSlPrk8yvKNnW9VhChfLEYkd2cHMij5XBKLuzpQEDIvLYWn59qzuzNI
+                        uJVLmaaXAuSaKaNYxCRWbCBVhkG8r7wPpolaXGIQrmC6orpmDmijdYZFUfbQmCKh
+                        0WKXOo8NKwYI50cW7CG3MX4jOo3ry82v7IVUlqHcccjbiPinKGQszPtKVNjhdFfX
+                        hl8lc53mVK6TO0oggY7QDqc/pRaD4/NvAfkdEafHomM6RvtEOAdZNl5XhnMCAwEA
+                        AQKCAgB1SoraC2HAHiOgPWTKoYkIpKOjP2cuVn+AyRAJtdTQL2qmYNYKmUwXFTea
+                        IGrRC1LFr190lAvMONwmoa9ZGv9jEiqx444b4zn/zZJEWLmmMimSs+Vrdr+VtP4J
+                        xbTmpfdP4Tbyf6ygmUiravxRKVd6mr3WBomXv98MumEuKAtpipj6s1xzeAwxRoCO
+                        eZfTysMU4mm0fYninFkbQuv3g2cSKE2GnP/wPu/lZoGe95QMkjSFK09dh0zrmIaN
+                        dJp+IqUoPVr67fRmVXG7vqZRrxhf1TrvfIKJetLJMKHCZ3q/n+Gt1gorRJQfBvhW
+                        9PHsbcwPxh+W2zyqBMzuKlj6AQ775EInMnpny6sqem8lFezuG2TNdFBCdJokbRM7
+                        u9no/Nyy46WcRoE2oWJHEEngzEWeCsRP0cuTk+GZJrS5T4pFSdQH5pO8yBl1zBDj
+                        iK415QAxhJpNSgmPZqcIluzDo80lB4v/bOhAOLyZiTxLT3V6HAN12PiRtzdvlPWs
+                        H8RfZ1iYsHyuYye+Yz/nIODMiJRQu6znsc7DeLUHxtozP+45XiZeJ2P1HiPXbjmS
+                        /8ddczSocPKrMgEgCq5sTPBajs6TPw+s9MN//RJGx1a75zJonY2I6stPdekohxEA
+                        0F4WdV9EYjXo1MAfK9+ylugJ4rzmqgTCLjd9u4hNsY5fJ8z5yQKCAQEA5jxy94TT
+                        PbGC15z3CJWG7F4pr26WE8ChPPDMmGDOOZCFO/r/z+LUyUVYEuB8R9fHjEMrfflE
+                        GxyxY4oCIiRlV5bC6BJIF8UE7SOQEFsMDO2CyRYV9K9zUmURSOLP57dWflUq+fWH
+                        1CAfrkyOEfSeEDSzFT9NATdP9M3rTWF+FaF/YIkKHRCqNSltUIDBxtnHrcQ7QXZN
+                        XCY8lhB1UKiyNj9bm62XfMlHz/G7GqiVWmpCQNov8Jq4aYdhXk5Beomc4zbLfBUH
+                        CAncTTbQzZWyT3KScMxw3z69Hm/DJHHgp54efund3M8oljgcQYkxpRYpq+SzfmSR
+                        f6+lsQLoWNnCZQKCAQEA5I/8R8/L/1APh6OJQoXTJxcNMGnEL6Hqi0hZBiCNNbwV
+                        AO8ksrlAYtXQfvnxD5WAgX4DmOPCSBc3qiR+g1qgVDaDCFsTSAb/8DXOumxeUFeW
+                        1DCIJAzHFY7goPqhuO9P+rsJWYrO9QifPFcwo959CRq0+oLKzHJin9H/fYhK+XZl
+                        sVfnAEbFzprQjgxJMwO883X11qZnrXPBcrgQP5G68rqDxf8dScuHGiZgE2T+gQzk
+                        HJss7+mcAA0m60JfVv4yG+UMfBO3cytncsKQeTaJMZ7eVyYtlO1pdc6Q0XbtnJpu
+                        Y4FfJzGmIXYo0cnEj9AoRFHAj7rI2zWnD4C5Od4r9wKCAQAOejScfdyun2/j0Pnz
+                        rztZt54VavXC7jT1WQr0dfnhwsWt/N2DG/dXZKXiIf2OovHoTvz4Iel3bvl0keQK
+                        c5FvzYoZ/7RK0le59aeEb8U1NuYncN0WksXEo5hPpft+zZeBwCdAqoDNBOwZELVK
+                        ScB6smWka2OTNQAxG5W1OvEruQkCb/uT0k1xpFY8XqxQrbcRpSo4tpCsv7bFlOlb
+                        lhAGuzsucd75uMpsN/4U8g7aLZ5W56FmFsSL1jh4LqGNbAPSgcqP1d6oUb5pmI3O
+                        r6ATwNeWgjSCxTYtKMfzjbmbsKSoRFpwHRKnR4X3VQIrKFaceXgT9Yz0o33ewJkN
+                        pTvFAoIBAQCM2BFtKyaZOPuo6OSPYqoAf5r4B2UGuS8wDzAUr4B06WbEAZnKrI95
+                        mCp35ItgwA7FPSL4VvmEtRHvPbfcN79uxXyvbHgQPYf/vRicFmVz+tWOAi4SkPEp
+                        XrcbW/bGYGoXpqQXUos/wcVmSJBHmrXQI238pRZVL/OIar6W26Lf4M6/ntxRdks0
+                        ioAT2IxO7HHGUR1h3X8sCpXdnIEeuy3Jn5fOLewdalbhjV5M9UJDwe7bld/2Iy2n
+                        dnNSK79WeyPjvpyX5Qp55PhFZpHir/GQ60Y1y+fwyu/e0aC6AyBfDWcS2EkLfPPT
+                        0N1MkZoXyPzXRM11hHN7aa99xSPe/gJ3AoIBAQCfkjTZt4QBI695bxG3f8BHyP6Z
+                        1ZGfx1PBarse8I9yCVCVViEyzVuYbfBp3Kyyn6U0wHIP3n4Qol2wBke8doly2ypm
+                        fvvC4exdAaGjVSylScmstQvY/MX9a+AabkwPNwtC4z2EN3o5dLTjm20pqTYqrpAy
+                        Ucl/Mn2FKMyVTv3mTJMqIrY9Jdphqj13Rb5BfYWR3M7qD0VWDeGh1e/Y0B+DuxNU
+                        TqB1E2ZFt+j71Ni51Bn2iVtG2Hu0v1wP2l4He9QR4e7CjL5kNbBpPjkA4jIuOgpL
+                        QihSYIp9eFz0RzqHum+HId6h0c7KwII2IuY3PEYYEui44dijdhSCaIN6755h
+                        -----END RSA PRIVATE KEY-----\n\
+
+logging:
+  level:
+    root: WARN
+    org.springframework.cloud: DEBUG
