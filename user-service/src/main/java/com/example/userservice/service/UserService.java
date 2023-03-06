@@ -4,8 +4,6 @@ import com.example.userservice.user.UserDto;
 
 public interface UserService {
 
-    UserDto createUser(UserDto userDto);
-
     UserDto getUserBySpotifyId(String spotifyId);
 
 }

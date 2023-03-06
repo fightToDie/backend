@@ -21,6 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private final Environment env;
+    private final OAuth2AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -33,6 +34,7 @@ public class SecurityConfiguration {
                 .oauth2Login(
                         oauth2 -> oauth2.redirectionEndpoint(
                                 redirection -> redirection.baseUri("/login/oauth2/code/*"))
+                                          .successHandler(authenticationSuccessHandler)
                 )
                 .oauth2Client(withDefaults());
         return http.build();
