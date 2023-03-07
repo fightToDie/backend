@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
-@RequestMapping("/webclient")
+@RequestMapping("/member")
 public class OAuth2WebClientController {
     private final WebClient webClient;
     public OAuth2WebClientController(WebClient webClient) {
         this.webClient = webClient;
     }
 
-    @GetMapping
+    @GetMapping("/info")
     ResponseEntity<String> explicit() {
         // @formatter:off
         String body = this.webClient

@@ -27,14 +27,14 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                                                              .requestMatchers("/", "/public/**",
-                                                                      "/health-check").permitAll()
-                                                              .anyRequest().authenticated()
+                  .requestMatchers("/",
+                          "/health-check").permitAll()
+                  .anyRequest().authenticated()
                 )
-                .oauth2Login(
-                        oauth2 -> oauth2.redirectionEndpoint(
-                                redirection -> redirection.baseUri("/login/oauth2/code/*"))
-                                          .successHandler(authenticationSuccessHandler)
+                .oauth2Login(oauth2 -> oauth2
+                   .redirectionEndpoint(redirection -> redirection
+                        .baseUri("/login/oauth2/code/*"))
+                        .successHandler(authenticationSuccessHandler)
                 )
                 .oauth2Client(withDefaults());
         return http.build();

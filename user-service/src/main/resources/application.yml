@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 0
 
 spring:
   application:
@@ -21,6 +21,15 @@ spring:
       database-platform: org.hibernate.dialect.MySQL8Dialect
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZonone: http://127.0.0.1:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
 
 
 logging:
