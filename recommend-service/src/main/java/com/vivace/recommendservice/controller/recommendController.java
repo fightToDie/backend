@@ -1,7 +1,7 @@
 package com.vivace.recommendservice.controller;
 
-import com.vivace.recommendservice.service.RecommendService;
 import com.vivace.recommendservice.vo.*;
+import com.vivace.recommendservice.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +38,15 @@ public class recommendController {
         return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 
-//    @GetMapping("/wordcloud/genre")
-//    public ResponseEntity<ResponseWordcloud> getGenreWordcloud() {
-//        recommendService.getGenreWordcloud()
-//    }
-//
-//    @GetMapping("/wordcloud/title")
-//    public ResponseEntity<ResponseWordcloud> getTitleWordcloud() {
-//
-//    }
+    @GetMapping("/wordcloud/genre/{recommendId}")
+    public ResponseEntity<ResponseWordcloud> getGenreWordcloud(@PathVariable Long recommendId) {
+        return ResponseEntity.status(HttpStatus.OK).body(recommendService.getGenreWordcloud(recommendId));
+    }
+
+    @GetMapping("/wordcloud/title/{recommendId}")
+    public ResponseEntity<ResponseWordcloud> getTitleWordcloud(@PathVariable Long recommendId) {
+        return ResponseEntity.status(HttpStatus.OK).body(recommendService.getTitleWordcloud(recommendId));
+    }
 
     @PostMapping("/feedback/{recommendId}")
     public ResponseEntity<String> feedbackRecommend(@PathVariable Long recommendId, @RequestBody RequestFeedback requestFeedback) {
