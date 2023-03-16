@@ -15,14 +15,16 @@ public class recommendController {
     private RecommendService recommendService;
 
     @GetMapping("")
-    public ResponseEntity<ResponseTrackUriList> recommendByTrack(@RequestParam String title, @RequestParam String artist) {
-        ResponseTrackUriList responseTrackUrilist = recommendService.recommendByTrack(title, artist);
+    public ResponseEntity<ResponseTrackIds> recommendByTrack(@RequestParam String title, @RequestParam String artist) {
+        Long userId = null;
+        ResponseTrackIds responseTrackUrilist = recommendService.recommendByTrack(userId, title, artist);
         return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 
     @GetMapping("/playlist/{playlistId}")
-    public ResponseEntity<ResponseTrackUriList> recommendByPlaylist(@PathVariable String playlistId) {
-        ResponseTrackUriList responseTrackUrilist = recommendService.recommendByPlaylist(playlistId);
+    public ResponseEntity<ResponseTrackIds> recommendByPlaylist(@PathVariable String playlistId) {
+        Long userId = null;
+        ResponseTrackIds responseTrackUrilist = recommendService.recommendByPlaylist(userId, playlistId);
         return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 
@@ -33,8 +35,8 @@ public class recommendController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<ResponseTrackUriList> searchTrackByTitle(@RequestParam String title, @RequestParam int offset) {
-        ResponseTrackUriList responseTrackUrilist = recommendService.searchTrackByTitle(title, offset);
+    public ResponseEntity<ResponseTrackIds> searchTrackByTitle(@RequestParam String title, @RequestParam int offset) {
+        ResponseTrackIds responseTrackUrilist = recommendService.searchTrackByTitle(title, offset);
         return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 

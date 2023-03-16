@@ -1,12 +1,15 @@
 package com.vivace.recommendservice.service;
 
 import com.vivace.recommendservice.entity.Recommend;
+import com.vivace.recommendservice.entity.RecommendPlaylist;
 import com.vivace.recommendservice.exception.BadRequestException;
 import com.vivace.recommendservice.exception.RecommendNotFoundException;
+import com.vivace.recommendservice.repository.GenreRepository;
 import com.vivace.recommendservice.repository.RecommendRepository;
+import com.vivace.recommendservice.repository.TitleRepository;
 import com.vivace.recommendservice.utils.HttpRequestHandler;
 import com.vivace.recommendservice.utils.SpotifyUriBuilder;
-import com.vivace.recommendservice.vo.ResponseTrackUriList;
+import com.vivace.recommendservice.vo.ResponseTrackIds;
 import com.vivace.recommendservice.vo.ResponseTrack;
 import com.vivace.recommendservice.vo.ResponseWordcloud;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -28,39 +32,89 @@ import java.util.Map;
 public class RecommendServiceImpl implements RecommendService{
 
     private RecommendRepository recommendRepository;
+    private TitleRepository titleRepository;
+    private GenreRepository genreRepository;
     private SpotifyUriBuilder uriBuilder;
     private HttpRequestHandler httpRequestHandler;
 
-    public RecommendServiceImpl(RecommendRepository recommendRepository, SpotifyUriBuilder uriBuilder, HttpRequestHandler httpRequestHandler) {
+    public RecommendServiceImpl(RecommendRepository recommendRepository, TitleRepository titleRepository,
+                                GenreRepository genreRepository, SpotifyUriBuilder uriBuilder, HttpRequestHandler httpRequestHandler) {
         this.recommendRepository = recommendRepository;
+        this.titleRepository = titleRepository;
+        this.genreRepository = genreRepository;
         this.uriBuilder = uriBuilder;
         this.httpRequestHandler = httpRequestHandler;
     }
 
     @Override
-    public ResponseTrackUriList recommendByTrack(String title, String artist) {
+    public ResponseTrackIds recommendByTrack(Long userId, String title, String artist) {
+        // 제목과 가수를 바탕으로 track Id 받아오기
+        String trackId = null;
+
         // AI 서버에 추천 리스트 요청
 
         // 리턴값 받아서 야무지게 처리 후 ResponseData 만들기
+        ResponseTrackIds response = new ResponseTrackIds();
 
-        // 워드 클라우드 생성
-        // 1. ID 바탕으로 제목, 장르 검색
-        // 2. 불용어 제거
-        // 3. DB 저장
+        // DB 저장
+        Recommend recommend = Recommend.builder()
+                .userId(userId)
+                .trackId(trackId)
+                .build();
 
-        return null;
+        // Id값 생성되는 시점?
+        recommend = recommendRepository.save(recommend);
+
+        return response;
     }
 
     @Override
-    public ResponseTrackUriList recommendByPlaylist(String playlistId) {
+    public ResponseTrackIds recommendByPlaylist(Long userId, String playlistId) {
+        // 제목과 가수를 바탕으로 track Id 받아오기
+        String trackId = null;
+
         // AI 서버에 추천 리스트 요청
 
         // 리턴값 받아서 야무지게 처리 후 ResponseData 만들기
+        ResponseTrackIds response = new ResponseTrackIds();
 
-        // 워드 클라우드 생성
+        // DB 저장
+        Recommend recommend = Recommend.builder()
+                .userId(userId)
+                .trackId(trackId)
+                .build();
+
+        // Id값 생성되는 시점?
+        recommend = recommendRepository.save(recommend);
+
+        return response;
+    }
+
+    private void saveTitleAndGenreForWordcloud(List<String> trackIds) {
         // 1. ID 바탕으로 제목, 장르 검색
+        List<String> titles = new ArrayList<>();
+        List<String> genres = new ArrayList<>();
+        for (String trackId : trackIds) {
+            // trackId 바탕으로 track 정보 요청하는 API 호출
+
+            // 제목만 추리기
+
+            // 장르만 추리기
+        }
+
         // 2. 불용어 제거
-        // 3. DB 저장
+        titles = deleteStopword(titles);
+        genres = deleteStopword(genres);
+
+        // 3. 개수 카운트
+
+        // 4. DB 저장
+
+    }
+
+    private List<String> deleteStopword(List<String> titles) {
+        // 사전바탕으로 불용어 제거
+        // 불용어 추가할 수 있도록 설정파일로 분리
 
         return null;
     }
@@ -75,7 +129,7 @@ public class RecommendServiceImpl implements RecommendService{
     }
 
     @Override
-    public ResponseTrackUriList searchTrackByTitle(String title, int offset) {
+    public ResponseTrackIds searchTrackByTitle(String title, int offset) {
         String uri = uriBuilder.getSearchTrackByTitleURI(title, offset);
         String spotifyToken = "BQBZCFUJZAu0Vy1cPYeWc3ue0p3SJMs7Ch1Dm1n31Z9Nbsgc2nzZeNYZ98nkORZljI3o9aWSDnkX3O0NLp5Kjml-qsrOvamgLm_O2a-YoXN3m88I78iDmup6p3rnYIHMWXtBHhVTGKhwBTuY_DuYQ1uxwRAop4Irz78BOohXbzw1iaYpk8uC9agmpOWBKByRMTQLXpmG";
         ResponseEntity<String> response = httpRequestHandler.getSearchTrackByTitleURI(spotifyToken, uri);
@@ -88,7 +142,7 @@ public class RecommendServiceImpl implements RecommendService{
 
         List<String> uriList = getTrackUriList(response);
 
-        return new ResponseTrackUriList(uriList, offset);
+        return new ResponseTrackIds(uriList, offset);
     }
 
     private List<String> getTrackUriList(ResponseEntity<String> response) {
@@ -110,8 +164,6 @@ public class RecommendServiceImpl implements RecommendService{
 
     @Override
     public ResponseWordcloud getGenreWordcloud(Long recommendId) {
-        // DB로 부터 recommendId를 바탕으로 띄어쓰기로 구분된 String 형태의 장르들을 가져오기
-        //TODO 1:n 엔티티를 추가하여 조인연산 vs delimeter로 구분하여 문자열로 형태로 저장하고 파싱
 
         Map<String, Integer> wordcloud = new HashMap<>();
 
