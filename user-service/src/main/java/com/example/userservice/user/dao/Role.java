@@ -1,4 +1,4 @@
-package com.example.userservice.user;
+package com.example.userservice.user.dao;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.userservice.user;
+package com.example.userservice.user.dao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

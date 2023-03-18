@@ -66,4 +66,4 @@ spring:
 logging:
   level:
     root: WARN
-    org.springframework.cloud: DEBUG
+    org.springframework.cloud: INFO
