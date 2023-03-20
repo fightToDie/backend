@@ -36,7 +36,7 @@ public class recommendController {
 
     @GetMapping("/search")
     public ResponseEntity<ResponseTrackIds> searchTrackByTitle(@RequestParam String title, @RequestParam int offset) {
-        ResponseTrackIds responseTrackUrilist = recommendService.searchTrackByTitle(title, offset);
+        ResponseTrackIds responseTrackUrilist = recommendService.searchTracksByTitle(title, offset);
         return ResponseEntity.status(HttpStatus.OK).body(responseTrackUrilist);
     }
 

@@ -8,7 +8,23 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Component
 public class HttpRequestHandler {
 
-    public ResponseEntity<String> getSearchTrackByTitleURI(String spotifyToken, String uri) {
+    public ResponseEntity<String> getSearchTracksByTitle(String spotifyToken, String uri) {
+        ResponseEntity<String> response = WebClient.create()
+                .get()
+                .uri(uri)
+                .headers(headers -> {
+                    headers.add(HttpHeaders.ACCEPT, "application/json");
+                    headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
+                    headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + spotifyToken);
+                })
+                .retrieve()
+                .toEntity(String.class)
+                .block();
+
+        return response;
+    }
+
+    public ResponseEntity<String> getTrackDetailsByTrackId(String spotifyToken, String uri) {
         ResponseEntity<String> response = WebClient.create()
                 .get()
                 .uri(uri)

@@ -1,7 +1,6 @@
 package com.vivace.recommendservice.service;
 
 import com.vivace.recommendservice.entity.Recommend;
-import com.vivace.recommendservice.entity.RecommendPlaylist;
 import com.vivace.recommendservice.exception.BadRequestException;
 import com.vivace.recommendservice.exception.RecommendNotFoundException;
 import com.vivace.recommendservice.repository.GenreRepository;
@@ -24,12 +23,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @Transactional(readOnly = true)
 public class RecommendServiceImpl implements RecommendService{
+
+    private static final String SPOTIFY_TOKEN = "BQBZCFUJZAu0Vy1cPYeWc3ue0p3SJMs7Ch1Dm1n31Z9Nbsgc2nzZeNYZ98nkORZljI3o9aWSDnkX3O0NLp5Kjml-qsrOvamgLm_O2a-YoXN3m88I78iDmup6p3rnYIHMWXtBHhVTGKhwBTuY_DuYQ1uxwRAop4Irz78BOohXbzw1iaYpk8uC9agmpOWBKByRMTQLXpmG";
 
     private RecommendRepository recommendRepository;
     private TitleRepository titleRepository;
@@ -100,6 +100,8 @@ public class RecommendServiceImpl implements RecommendService{
             // 제목만 추리기
 
             // 장르만 추리기
+            // artistId 바탕으로 https://api.spotify.com/v1/artists/{id} 요청
+            // genres에서 가져오기
         }
 
         // 2. 불용어 제거
@@ -129,10 +131,9 @@ public class RecommendServiceImpl implements RecommendService{
     }
 
     @Override
-    public ResponseTrackIds searchTrackByTitle(String title, int offset) {
-        String uri = uriBuilder.getSearchTrackByTitleURI(title, offset);
-        String spotifyToken = "BQBZCFUJZAu0Vy1cPYeWc3ue0p3SJMs7Ch1Dm1n31Z9Nbsgc2nzZeNYZ98nkORZljI3o9aWSDnkX3O0NLp5Kjml-qsrOvamgLm_O2a-YoXN3m88I78iDmup6p3rnYIHMWXtBHhVTGKhwBTuY_DuYQ1uxwRAop4Irz78BOohXbzw1iaYpk8uC9agmpOWBKByRMTQLXpmG";
-        ResponseEntity<String> response = httpRequestHandler.getSearchTrackByTitleURI(spotifyToken, uri);
+    public ResponseTrackIds searchTracksByTitle(String title, int offset) {
+        String uri = uriBuilder.getSearchTracksByTitleURI(title, offset);
+        ResponseEntity<String> response = httpRequestHandler.getSearchTracksByTitle(SPOTIFY_TOKEN, uri);
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new BadRequestException();

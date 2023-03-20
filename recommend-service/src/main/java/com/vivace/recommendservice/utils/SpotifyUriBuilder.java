@@ -8,7 +8,7 @@ public class SpotifyUriBuilder {
 
     private static final int PAGE_LIMIT = 10;
 
-    public String getSearchTrackByTitleURI(String title, int offset) {
+    public String getSearchTracksByTitleURI(String title, int offset) {
         //TODO 설정파일로 분리하기
         String uri = "https://api.spotify.com/v1/search";
 
