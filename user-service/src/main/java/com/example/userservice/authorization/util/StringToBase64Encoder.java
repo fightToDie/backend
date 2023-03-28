@@ -1,4 +1,4 @@
-package com.example.userservice.auth;
+package com.example.userservice.authorization.util;
 
 import java.util.Base64;
 

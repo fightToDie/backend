@@ -1,4 +1,4 @@
-package com.example.userservice.auth;
+package com.example.userservice.authorization.dto;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;

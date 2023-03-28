@@ -1,4 +1,4 @@
-package com.example.apigatewayservice;
+package com.example.apigatewayservice.jwt;
 
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
